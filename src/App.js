@@ -15,8 +15,8 @@ export default function App() {
   const { seconds, isRunning, start, reset } = useStopwatch({});
   const { speak, speaking, supported } = useSpeechSynthesis();
 
-  const doReset = useCallback(() => reset(0, false), [reset]);
-  const doSpeak = useCallback((...p) => speak(...p), [speak]);
+  const doReset = useCallback(() => reset(0, false), []);
+  // const doSpeak = useCallback((...p) => speak(...p), [speak]);
 
   const updateTimers = (index, time, text) => {
     const newTimers = [...timers];
@@ -34,12 +34,12 @@ export default function App() {
     const foundTimer = timers.find((timer) => timer.time === seconds);
     if (foundTimer) {
       // speak the text
-      doSpeak({text: foundTimer.text})
+      speak({text: foundTimer.text})
     }
 
     // check to see if seconds is greater than the last timers time
     if (seconds > timers[timers.length - 1].time) doReset();
-  }, [seconds, timers, doReset, doSpeak])
+  }, [seconds, timers, doReset])
 
   if (!supported) {
     return <div>Your browser is not supported. Sorry</div>
