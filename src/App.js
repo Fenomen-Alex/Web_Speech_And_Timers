@@ -28,8 +28,9 @@ export default function App() {
     marginBottom: 12,
   };
 
+  // eslint-disable-next-line
   const doReset = useCallback(() => reset(0, false), []);
-  // const doSpeak = useCallback((...p) => speak(...p), [speak]);
+  // const doSpeak = useCallback((...p) => speak(...p), []);
 
   const updateTimers = (index, time, text) => {
     const newTimers = [...timers];
@@ -51,7 +52,7 @@ export default function App() {
     }
 
     // check to see if seconds is greater than the last timers time
-    if (seconds > timers[timers.length - 1].time) doReset();
+    if (seconds > timers[timers.length - 1].time) doReset(); // eslint-disable-next-line
   }, [seconds, timers, doReset, rate, pitch, voice])
 
   if (!supported) {
