@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import TimerSlot from "./components/TimerSlot";
+import {useStopwatch} from "react-timer-hook";
 
 export default function App() {
 
   const [timers, setTimers] = useState([
-    { time: 2, text: 'this is my message'},
-    { time: 5, text: 'hello'},
-    { time: 8, text: 'whats up'}
+    {time: 2, text: 'this is my message'},
+    {time: 5, text: 'hello'},
+    {time: 8, text: 'whats up'}
   ]);
+  const {seconds, isRunning, start, reset} = useStopwatch({autoStart: true});
 
   const updateTimers = (index, time, text) => {
     const newTimers = [...timers];
@@ -21,6 +23,16 @@ export default function App() {
     const newTimers = [...timers, {time: 12, text: 'new text'}];
     setTimers(newTimers);
   }
+
+  useEffect(() => {
+    const foundTimer = timers.find((timer) => timer.time === seconds);
+    if (foundTimer) {
+      // speak the text
+    }
+
+    // check to see if seconds is greater than the last timers time
+    if (seconds > timers[timers.length - 1].time) reset();
+  }, [seconds, timers, reset])
 
   return (
     <div className="app">
@@ -41,12 +53,26 @@ export default function App() {
       </div>
 
       {/* seconds */}
-      <h2>0</h2>
+      <h2>{seconds}</h2>
 
       {/* buttons */}
       <div className="buttons">
-        <button className="start-button">Start</button>
-        <button className="stop-button">Stop</button>
+        {!isRunning && (
+          <button
+            className="start-button"
+            onClick={start}
+          >
+            Start
+          </button>
+        )}
+        {isRunning && (
+          <button
+            className="stop-button"
+            onClick={reset}
+          >
+            Stop
+          </button>
+        )}
       </div>
     </div>
   );
