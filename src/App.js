@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
+import { useSpeechSynthesis } from 'react-speech-kit';
+import TimerSlot from './components/TimerSlot';
+import { useStopwatch } from 'react-timer-hook';
 import './App.css';
-import TimerSlot from "./components/TimerSlot";
-import {useStopwatch} from "react-timer-hook";
+
 
 export default function App() {
 
@@ -10,7 +12,11 @@ export default function App() {
     {time: 5, text: 'hello'},
     {time: 8, text: 'whats up'}
   ]);
-  const {seconds, isRunning, start, reset} = useStopwatch({autoStart: true});
+  const { seconds, isRunning, start, reset } = useStopwatch({});
+  const { speak, speaking, supported } = useSpeechSynthesis();
+
+  const doReset = useCallback(() => reset(0, false), [reset]);
+  const doSpeak = useCallback((...p) => speak(...p), [speak]);
 
   const updateTimers = (index, time, text) => {
     const newTimers = [...timers];
@@ -28,11 +34,16 @@ export default function App() {
     const foundTimer = timers.find((timer) => timer.time === seconds);
     if (foundTimer) {
       // speak the text
+      doSpeak({text: foundTimer.text})
     }
 
     // check to see if seconds is greater than the last timers time
-    if (seconds > timers[timers.length - 1].time) reset();
-  }, [seconds, timers, reset])
+    if (seconds > timers[timers.length - 1].time) doReset();
+  }, [seconds, timers, doReset, doSpeak])
+
+  if (!supported) {
+    return <div>Your browser is not supported. Sorry</div>
+  }
 
   return (
     <div className="app">
@@ -68,11 +79,13 @@ export default function App() {
         {isRunning && (
           <button
             className="stop-button"
-            onClick={reset}
+            onClick={doReset}
           >
             Stop
           </button>
         )}
+
+        {speaking && <p>I am speaking...</p>}
       </div>
     </div>
   );

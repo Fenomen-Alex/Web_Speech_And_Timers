@@ -14,7 +14,7 @@ const TimerSlot = ({ index, timer, updateTimers }) => {
       <input
         type="number"
         value={time}
-        onChange={(e) => setTime(e.target.value)}
+        onChange={(e) => setTime(+e.target.value)}
         onBlur={handleBlur}
       />
       <input
