@@ -1,19 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
+import TimerSlot from "./components/TimerSlot";
 
 export default function App() {
+
+  const [timers, setTimers] = useState([
+    { time: 2, text: 'this is my message'},
+    { time: 5, text: 'hello'},
+    { time: 8, text: 'whats up'}
+  ]);
+
+  const updateTimers = (index, time, text) => {
+    const newTimers = [...timers];
+    newTimers[index].time = time;
+    newTimers[index].text = text;
+    setTimers(newTimers);
+  }
+
+  const addTimer = () => {
+    const newTimers = [...timers, {time: 12, text: 'new text'}];
+
+  }
+
   return (
     <div className="app">
       <h2>Talk the Talk</h2>
 
       <div className="timers">
         {/* timers go here */}
-        <form className="timer">
-          <input type="number" />
-          <input type="text" />
-        </form>
+        {timers.map((timer, index) => (
+          <TimerSlot
+            key={index}
+            index={index}
+            timer={timer}
+            updateTimers={updateTimers}
+          />
+        ))}
 
-        <button className="add-button">Add</button>
+        <button className="add-button" onClick={addTimer}>Add</button>
       </div>
 
       {/* seconds */}
