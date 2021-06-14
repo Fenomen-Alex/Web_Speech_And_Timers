@@ -19,7 +19,7 @@ export default function App() {
 
   const addTimer = () => {
     const newTimers = [...timers, {time: 12, text: 'new text'}];
-
+    setTimers(newTimers);
   }
 
   return (
