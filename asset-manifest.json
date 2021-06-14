@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Web_Speech_And_Timers/static/css/main.2a3d0a26.chunk.css",
+    "main.js": "/Web_Speech_And_Timers/static/js/main.b2f46228.chunk.js",
+    "main.js.map": "/Web_Speech_And_Timers/static/js/main.b2f46228.chunk.js.map",
+    "runtime-main.js": "/Web_Speech_And_Timers/static/js/runtime-main.8cba821e.js",
+    "runtime-main.js.map": "/Web_Speech_And_Timers/static/js/runtime-main.8cba821e.js.map",
+    "static/js/2.463f16f6.chunk.js": "/Web_Speech_And_Timers/static/js/2.463f16f6.chunk.js",
+    "static/js/2.463f16f6.chunk.js.map": "/Web_Speech_And_Timers/static/js/2.463f16f6.chunk.js.map",
+    "index.html": "/Web_Speech_And_Timers/index.html",
+    "precache-manifest.75a9efee2949927dcd734ba5cb035861.js": "/Web_Speech_And_Timers/precache-manifest.75a9efee2949927dcd734ba5cb035861.js",
+    "service-worker.js": "/Web_Speech_And_Timers/service-worker.js",
+    "static/css/main.2a3d0a26.chunk.css.map": "/Web_Speech_And_Timers/static/css/main.2a3d0a26.chunk.css.map",
+    "static/js/2.463f16f6.chunk.js.LICENSE.txt": "/Web_Speech_And_Timers/static/js/2.463f16f6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8cba821e.js",
+    "static/js/2.463f16f6.chunk.js",
+    "static/css/main.2a3d0a26.chunk.css",
+    "static/js/main.b2f46228.chunk.js"
+  ]
+}
