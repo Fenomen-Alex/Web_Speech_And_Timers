@@ -32,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Luckiest Guy';
+  font-family: 'Luckiest Guy', serif;
   color: #fbca17;
   font-size: 60px;
   margin-top: 0;
@@ -108,4 +108,15 @@ button {
 .buttons p {
   font-size: 16px;
   color: #555;
+}
+
+.styleFlexRow { 
+  display: flex;
+  flex-direction: row;
+}
+
+.styleContainerRatePitch {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
 }

@@ -1,4 +1,6 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import * as React from 'react';
+import {useCallback, useEffect, useState} from 'react';
+// @ts-ignore
 import { useSpeechSynthesis } from 'react-speech-kit';
 import TimerSlot from './components/TimerSlot';
 import { useStopwatch } from 'react-timer-hook';
@@ -14,25 +16,18 @@ export default function App() {
   ]);
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
-  const [voiceIndex, setVoiceIndex] = useState(null);
+  const [voiceIndex, setVoiceIndex] = useState<string | null>(null);
 
   const { seconds, isRunning, start, reset } = useStopwatch({});
   const { speak, speaking, supported, voices } = useSpeechSynthesis();
 
   const voice = voices[voiceIndex] || null;
 
-  const styleFlexRow = { display: 'flex', flexDirection: 'row' };
-  const styleContainerRatePitch = {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 12,
-  };
-
   // eslint-disable-next-line
   const doReset = useCallback(() => reset(0, false), []);
   // const doSpeak = useCallback((...p) => speak(...p), []);
 
-  const updateTimers = (index, time, text) => {
+  const updateTimers = (index: number, time: number, text: string) => {
     const newTimers = [...timers];
     newTimers[index].time = time;
     newTimers[index].text = text;
@@ -74,14 +69,14 @@ export default function App() {
           }}
         >
           <option value="">Default</option>
-          {voices.map((option, index) => (
+          {voices.map((option: typeof voice, index: number) => (
             <option key={option.voiceURI} value={index}>
               {`${option.lang} - ${option.name}`}
             </option>
           ))}
         </select>
-        <div style={styleContainerRatePitch}>
-          <div style={styleFlexRow}>
+        <div className="styleContainerRatePitch">
+          <div className="styleFlexRow">
             <label htmlFor="rate">Rate: </label>
             <div className="rate-value">{rate}</div>
           </div>
@@ -93,12 +88,12 @@ export default function App() {
             step="0.1"
             id="rate"
             onChange={(event) => {
-              setRate(event.target.value);
+              setRate(+event.target.value);
             }}
           />
         </div>
-        <div style={styleContainerRatePitch}>
-          <div style={styleFlexRow}>
+        <div className="styleContainerRatePitch">
+          <div className="styleFlexRow">
             <label htmlFor="pitch">Pitch: </label>
             <div className="pitch-value">{pitch}</div>
           </div>
@@ -110,7 +105,7 @@ export default function App() {
             step="0.1"
             id="pitch"
             onChange={(event) => {
-              setPitch(event.target.value);
+              setPitch(+event.target.value);
             }}
           />
         </div>
