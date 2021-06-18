@@ -7,7 +7,7 @@ import { useStopwatch } from 'react-timer-hook';
 import './App.css';
 
 
-export default function App() {
+export default function App(): JSX.Element {
 
   const [timers, setTimers] = useState([
     {time: 2, text: 'this is my message'},

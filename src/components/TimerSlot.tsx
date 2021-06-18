@@ -10,7 +10,7 @@ type PropsType = {
     updateTimers: Function
 }
 
-const TimerSlot = ({index, timer, updateTimers}: PropsType) => {
+const TimerSlot = ({index, timer, updateTimers}: PropsType): JSX.Element => {
 
     const [time, setTime] = useState(timer.time);
     const [text, setText] = useState(timer.text);
